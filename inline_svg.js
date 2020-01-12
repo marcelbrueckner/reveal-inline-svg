@@ -1,28 +1,40 @@
-Reveal.getSlides().forEach(function(s){
+Reveal.getSlides().forEach(function(slide) {
+
   // Hope external data has been loaded after timeout
-  window.setTimeout(function() {
-    s.querySelectorAll("object").forEach(function(e) {
+  window.setTimeout( function() {
+
+    slide.querySelectorAll("object").forEach(function(e) {
+
       var params;
       params = e.querySelectorAll("param");
-      //replacing object with inline svg
+
+      // Replace object with inline svg
       if (e.contentDocument)
         e.parentElement.replaceChild(e.contentDocument.documentElement.cloneNode(true), e);
-      //Setting "preserveAspectRatio" for each SVG to scale correctly
-      s.querySelectorAll("svg").forEach(function(e){
+      
+      // Set "preserveAspectRatio" for each SVG to scale correctly
+      slide.querySelectorAll("svg").forEach(function(e) {
         e.setAttribute("preserveAspectRatio","xMinYMin meet");
       });
-      //applying formating according to params
-      params.forEach(function(p){
-        var svg_e;
-        //get svg element with the same id
-        svg_e = s.querySelector("#".concat(p.getAttribute("id")));
-        //apply the attributes of the param element to the svg element
-        var attrs = p.attributes;
-        for(var i = attrs.length - 1; i >= 0; i--) {
-          if (attrs[i].name!="id")
-          svg_e.setAttribute(attrs[i].name, attrs[i].value);
+      
+      // Apply formating according to param's attributes
+      params.forEach(function(param) {
+        var element,
+          attributeName,
+          attributeValue;
+
+        // <param data-selector="#element-id" data-attribute-name="class" data-attribute-value="fragment">
+        // <param data-selector="#element-id" data-attribute-name="data-fragment-index" data-attribute-value="0">
+        element = slide.querySelector(param.dataset.selector);
+        attributeName = param.getAttribute("data-attribute-name");
+        attributeValue = param.getAttribute("data-attribute-value");
+        
+        if (attributeName == "class") {
+          element.className.baseVal += " " + attributeValue;
+        } else {
+          element.setAttribute(attributeName, attributeValue);
         }
       });
-    });
-  }), 1000
+    }), 1000
+  });
 });
