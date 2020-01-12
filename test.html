@@ -16,12 +16,14 @@
 				<!-- 	Example slide		 -->
 				<section>
 					<h4 class="fragment" data-fragment-index="5">Example: Animate with Velocity.js!</h4>
-					<object type="image/svg+xml" data="drawing.svg">
-						<param id="path14" class="fragment fade-up" data-fragment-index="1">
-						<param id="path20" class="fragment fade-left" data-fragment-index="2">
-						<param id="rect10" class="fragment fade-right" data-fragment-index="3">	
-					
-	</object>
+          <object type="image/svg+xml" data="drawing.svg">
+            <param data-selector="#path14" data-attribute-name="class" data-attribute-value="fragment fade-up">
+            <param data-selector="#path14" data-attribute-name="data-fragment-index" data-attribute-value="1">
+            <param data-selector="#path20" data-attribute-name="class" data-attribute-value="fragment fade-left">
+            <param data-selector="#path20" data-attribute-name="data-fragment-index" data-attribute-value="2">
+            <param data-selector="#rect10" data-attribute-name="class" data-attribute-value="fragment fade-right">
+            <param data-selector="#rect10" data-attribute-name="data-fragment-index" data-attribute-value="3">
+					</object>
 					<h4 class="fragment" data-fragment-index="4">That was a fragmented svg</h4>
 					<div class="fragment" data-fragment-index="6" id="animate_1"></div>
 				</section>
@@ -33,7 +35,7 @@
 		<script src= '/lib/js/velocity.min.js'></script>
 
 		<script>
-      ]Reveal.initialize({
+      Reveal.initialize({
 				dependencies: [
 					{ src:'inline_svg.js', async: true }
         ]
